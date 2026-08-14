@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>All I Need Is Love — Prototype</title>
+  <style>
+    :root{--bg:#f6f2ed;--card:#fff;--ink:#1c1b1a;--muted:#706b66;--line:#e8e0d8;--accent:#1c1b1a;--soft:#efe7df;--good:#e8f1eb;--shadow:0 20px 60px rgba(31,24,18,.12)}
+    *{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:linear-gradient(180deg,#eee6dd,#f8f5f1 50%,#eee7df);color:var(--ink);min-height:100vh;display:grid;place-items:center;padding:24px}
+    .wrap{width:min(100%,430px)}.brand{text-align:center;margin:0 0 14px}.brand b{font-size:14px;letter-spacing:.12em;text-transform:uppercase}.brand div{font-size:12px;color:var(--muted);margin-top:5px}
+    .phone{height:820px;max-height:88vh;background:var(--card);border:1px solid rgba(40,30,20,.08);border-radius:36px;box-shadow:var(--shadow);overflow:hidden;position:relative}
+    .top{height:34px;display:flex;justify-content:space-between;align-items:center;padding:0 20px;font-size:11px;font-weight:700}.screen{display:none;height:calc(100% - 34px);overflow:auto;padding:22px 22px 100px}.screen.active{display:block}
+    h1{font-size:34px;line-height:1.02;margin:14px 0 12px;letter-spacing:-.04em}h2{font-size:25px;margin:2px 0 10px;letter-spacing:-.03em}h3{font-size:15px;margin:0 0 6px}.sub{color:var(--muted);font-size:15px;line-height:1.5;margin:0 0 22px}.eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:800}
+    .hero{background:linear-gradient(145deg,#f2e6dc,#f8f3ef);border:1px solid var(--line);border-radius:28px;padding:24px;margin:18px 0}.hero .orb{width:92px;height:92px;border-radius:50%;display:grid;place-items:center;margin:8px auto 22px;background:#fff;border:1px solid var(--line);font-size:34px}
+    .card{border:1px solid var(--line);border-radius:22px;padding:17px;margin:12px 0;background:#fff}.soft{background:var(--soft);border-color:transparent}.row{display:flex;align-items:center;justify-content:space-between;gap:14px}.left{display:flex;align-items:center;gap:12px}.avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(145deg,#d8c1b3,#f3e7df);display:grid;place-items:center;font-weight:800}.tiny{font-size:12px;color:var(--muted)}.value{font-size:14px;font-weight:750}.big{font-size:28px;font-weight:800;letter-spacing:-.03em}
+    button{font:inherit}.primary,.secondary,.ghost{width:100%;border-radius:16px;padding:15px 16px;font-weight:800;cursor:pointer;margin-top:10px}.primary{border:1px solid var(--accent);background:var(--accent);color:white}.secondary{border:1px solid var(--line);background:white;color:var(--ink)}.ghost{border:0;background:transparent;color:var(--muted)}
+    .choice{border:1px solid var(--line);padding:14px 15px;border-radius:16px;margin:10px 0;display:flex;justify-content:space-between;align-items:center;cursor:pointer}.choice.selected{border-color:#292521;background:#f5f0eb}.pill{padding:7px 10px;border-radius:999px;background:#f1ece7;font-size:11px;font-weight:800}.pill.good{background:var(--good)}
+    .nav{position:absolute;left:0;right:0;bottom:0;padding:12px 18px 18px;background:linear-gradient(180deg,rgba(255,255,255,0),#fff 26%);display:flex;gap:8px}.nav button{flex:1;border:0;background:#f3efeb;border-radius:14px;padding:10px 5px;font-size:10px;font-weight:800;color:#817a74}.nav button.on{background:#211f1d;color:#fff}
+    .divider{height:1px;background:var(--line);margin:16px 0}.toggle{width:48px;height:28px;border-radius:999px;background:#d9d4cf;padding:3px;transition:.2s}.toggle span{display:block;width:22px;height:22px;border-radius:50%;background:white;transition:.2s}.toggle.on{background:#222}.toggle.on span{transform:translateX(20px)}
+    .timeline{border-left:2px solid var(--line);margin-left:8px;padding-left:18px}.moment{position:relative;margin:18px 0}.moment:before{content:"";position:absolute;left:-24px;top:3px;width:10px;height:10px;border-radius:50%;background:#222;border:3px solid white;box-shadow:0 0 0 1px var(--line)}
+    .notice{font-size:12px;line-height:1.45;padding:13px 14px;border-radius:14px;background:#f7f4f1;color:#665f59;border:1px solid var(--line)}.danger{border-color:#efdddd;background:#fff8f8}.center{text-align:center}.spacer{height:10px}.progress{display:flex;gap:5px;margin:0 0 20px}.progress i{height:4px;flex:1;border-radius:999px;background:#e9e3de}.progress i.done{background:#24211f}
+    .call{background:#181716;color:white;border-radius:28px;padding:22px;min-height:360px;display:flex;flex-direction:column;justify-content:space-between}.call .avatar{width:112px;height:112px;margin:44px auto 10px;color:#1e1c1b}.callActions{display:flex;justify-content:center;gap:16px}.round{width:58px;height:58px;border-radius:50%;border:0;background:#333;color:white;font-size:20px}.round.end{background:#fff;color:#111}
+    @media(max-height:780px){.phone{height:720px}h1{font-size:30px}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand"><b>All I Need Is Love</b><div>Presence, not possession.</div></div>
+  <main class="phone">
+    <div class="top"><span>9:41</span><span>● ● ●</span></div>
+
+    <section class="screen active" data-screen="welcome">
+      <span class="eyebrow">A private world for two</span>
+      <div class="hero"><div class="orb">♡</div><h1>Long distance shouldn't mean separate lives.</h1><p class="sub">Share the ordinary moments, stay close across time zones, and keep control of what is yours.</p></div>
+      <button class="primary" onclick="go('pair')">Create our space</button>
+      <button class="secondary" onclick="go('pair')">I have an invite</button>
+      <div class="spacer"></div><p class="notice">Everything sensitive is optional. Each person controls their own sharing. No hidden access.</p>
+    </section>
+
+    <section class="screen" data-screen="pair">
+      <div class="progress"><i class="done"></i><i></i><i></i></div><span class="eyebrow">Pair</span><h1>Who do you want closer?</h1><p class="sub">Invite one person into a private shared space. They choose whether to join.</p>
+      <div class="card soft center"><div class="avatar" style="margin:auto">You</div><h3 style="margin-top:12px">Your private invite</h3><div class="tiny">Expires in 24 hours</div></div>
+      <button class="primary" onclick="go('accepted')">Send invitation</button><button class="ghost" onclick="go('welcome')">Back</button>
+    </section>
+
+    <section class="screen" data-screen="accepted">
+      <div class="progress"><i class="done"></i><i class="done"></i><i></i></div><span class="eyebrow">Connected</span><h1>You both chose this.</h1><p class="sub">No owner. No sub-user. Two people with equal control over one shared space.</p>
+      <div class="card row"><div class="left"><div class="avatar">A</div><div><div class="value">Alex</div><div class="tiny">London · 09:41</div></div></div><span>♡</span></div>
+      <div class="card row"><div class="left"><div class="avatar">M</div><div><div class="value">Maya</div><div class="tiny">Manila · 16:41</div></div></div><span>♡</span></div>
+      <button class="primary" onclick="go('home')">Enter our space</button>
+    </section>
+
+    <section class="screen" data-screen="home">
+      <span class="eyebrow">Right now</span><h2>Good morning, Alex.</h2><p class="sub">Maya is 6,700 miles away. The ordinary bits don't have to feel that far.</p>
+      <div class="card"><div class="row"><div class="left"><div class="avatar">M</div><div><div class="value">Maya</div><div class="tiny">16:41 · Manila</div></div></div><span class="pill good">Available</span></div><div class="divider"></div><div class="row"><span class="tiny">Mood</span><b>Calm ☁️</b></div><div class="row" style="margin-top:10px"><span class="tiny">Shared status</span><b>Studying</b></div></div>
+      <div class="card soft"><div class="tiny">Until we meet</div><div class="big">36 days</div><div class="tiny">Next airport hug · 19 Sep</div></div>
+      <button class="primary" onclick="go('moment')">Come sit with me</button><button class="secondary" onclick="go('timeline')">Open our story</button>
+      <div class="nav"><button class="on" onclick="go('home')">Home</button><button onclick="go('timeline')">Story</button><button onclick="go('privacy')">Controls</button></div>
+    </section>
+
+    <section class="screen" data-screen="moment">
+      <span class="eyebrow">Shared moment</span><h1>What are you inviting Maya into?</h1><p class="sub">A request is just a request. Maya can accept, decline, or choose a different mode.</p>
+      <div class="choice selected" onclick="selectChoice(this)"><div><b>Voice</b><div class="tiny">Just be together for a while</div></div><span>✓</span></div>
+      <div class="choice" onclick="selectChoice(this)"><div><b>Video</b><div class="tiny">See each other</div></div><span></span></div>
+      <div class="choice" onclick="selectChoice(this)"><div><b>Share my screen</b><div class="tiny">I choose what I present</div></div><span></span></div>
+      <button class="primary" onclick="go('incoming')">Send invitation</button><button class="ghost" onclick="go('home')">Cancel</button>
+    </section>
+
+    <section class="screen" data-screen="incoming">
+      <div class="center" style="padding-top:80px"><div class="avatar" style="width:92px;height:92px;margin:auto;font-size:24px">A</div><p class="eyebrow" style="margin-top:22px">Alex wants to be together</p><h1>Come sit with me?</h1><p class="sub">Voice session · nothing starts until you accept.</p></div>
+      <button class="primary" onclick="go('call')">Accept</button><button class="secondary" onclick="go('home')">Not now</button><p class="notice" style="margin-top:14px">Declining never removes core app features and does not require an explanation.</p>
+    </section>
+
+    <section class="screen" data-screen="call">
+      <div class="call"><div class="center"><div class="tiny" style="color:#aaa">TOGETHER NOW · 04:12</div><div class="avatar">M</div><h2>Maya</h2><div style="color:#aaa">Manila · 16:45</div></div><div><div class="callActions"><button class="round">◉</button><button class="round">⌁</button><button class="round end" onclick="go('ended')">×</button></div><p class="tiny center" style="color:#999;margin-top:20px">This session is live and is not recorded by default.</p></div></div>
+    </section>
+
+    <section class="screen" data-screen="ended">
+      <div class="center" style="padding-top:90px"><div class="orb" style="margin:auto">♡</div><h1>That was yours.</h1><p class="sub">12 minutes together. Nothing recorded.</p></div><button class="primary" onclick="go('timeline')">Save a note to our story</button><button class="secondary" onclick="go('home')">Back home</button>
+    </section>
+
+    <section class="screen" data-screen="timeline">
+      <span class="eyebrow">Our story</span><h2>Small things become a life.</h2><p class="sub">Only the two of you can see this shared timeline.</p>
+      <div class="timeline"><div class="moment"><h3>Today</h3><div class="tiny">12-minute voice moment</div></div><div class="moment"><h3>Yesterday</h3><div class="tiny">Maya added “Sunset after class”</div></div><div class="moment"><h3>7 days ago</h3><div class="tiny">Trip plan created · Spain</div></div><div class="moment"><h3>14 days ago</h3><div class="tiny">Your space began ♡</div></div></div>
+      <button class="primary" onclick="go('home')">Add a moment</button>
+      <div class="nav"><button onclick="go('home')">Home</button><button class="on">Story</button><button onclick="go('privacy')">Controls</button></div>
+    </section>
+
+    <section class="screen" data-screen="privacy">
+      <span class="eyebrow">Your controls</span><h2>You stay in charge of you.</h2><p class="sub">These settings only control what you choose to share. Maya has her own independent controls.</p>
+      <div class="card row"><div><b>Right now status</b><div class="tiny">Mood and availability</div></div><div class="toggle on" onclick="toggle(this)"><span></span></div></div>
+      <div class="card row"><div><b>Optional location</b><div class="tiny">Off by default in this prototype</div></div><div class="toggle" onclick="toggle(this)"><span></span></div></div>
+      <div class="card row"><div><b>Session requests</b><div class="tiny">Always ask before joining</div></div><span class="pill">Ask every time</span></div>
+      <button class="secondary" onclick="privateTime()">Private time</button><p class="notice" id="privateNote">Private time pauses optional sharing without notifying your partner why.</p>
+      <div class="divider"></div><button class="secondary danger" onclick="go('disconnect')">Disconnect our space</button>
+      <div class="nav"><button onclick="go('home')">Home</button><button onclick="go('timeline')">Story</button><button class="on">Controls</button></div>
+    </section>
+
+    <section class="screen" data-screen="disconnect">
+      <span class="eyebrow">Disconnect</span><h1>Your account remains yours.</h1><p class="sub">Disconnecting ends pair-scoped sessions and optional sharing. It does not lock either person out of their own account.</p>
+      <div class="notice danger"><b>What ends immediately</b><br>Active shared sessions, pair-scoped grants, and access to new shared content.</div>
+      <button class="primary" onclick="go('welcome')">Confirm disconnect</button><button class="secondary" onclick="go('privacy')">Keep our space</button>
+    </section>
+  </main>
+</div>
+<script>
+  function go(name){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const next=document.querySelector(`[data-screen="${name}"]`);if(next){next.classList.add('active');next.scrollTop=0}}
+  function toggle(el){el.classList.toggle('on')}
+  function selectChoice(el){el.parentElement.querySelectorAll('.choice').forEach(c=>{c.classList.remove('selected');c.lastElementChild.textContent=''});el.classList.add('selected');el.lastElementChild.textContent='✓'}
+  function privateTime(){document.querySelectorAll('.toggle').forEach(t=>t.classList.remove('on'));document.getElementById('privateNote').innerHTML='<b>Private time is on.</b><br>Optional sharing is paused. Turn features back on individually whenever you choose.'}
+</script>
+</body>
+</html>
