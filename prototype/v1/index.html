@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0d0d0f" />
+  <title>All I Need Is Love — Presence Prototype</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="stage">
+    <header class="prototype-header">
+      <div>
+        <span class="wordmark">ALL I NEED IS LOVE</span>
+        <span class="tagline">Presence, not possession.</span>
+      </div>
+      <span class="prototype-badge">PRODUCT PROTOTYPE · V1</span>
+    </header>
+
+    <div class="device-shell" aria-label="Interactive mobile prototype">
+      <div class="device-status"><span>9:41</span><span>● ● ●</span></div>
+      <div class="screen-stack">
+
+        <section class="screen active" data-screen="welcome">
+          <div class="welcome-art" aria-hidden="true">
+            <span class="orbit orbit-a"></span>
+            <span class="orbit orbit-b"></span>
+            <span class="heart-mark">♡</span>
+          </div>
+          <p class="kicker">A private world for two</p>
+          <h1>Long distance shouldn't mean separate lives.</h1>
+          <p class="lead">Share the ordinary moments. Feel close across time zones. Keep complete control of what is yours.</p>
+          <div class="stack-actions">
+            <button class="btn primary" data-go="pair">Create our space</button>
+            <button class="btn secondary" data-go="invite">I have an invite</button>
+          </div>
+          <div class="trust-note"><span>◌</span><p>Everything sensitive is optional. No hidden access. No owner. No sub-user.</p></div>
+        </section>
+
+        <section class="screen" data-screen="pair">
+          <button class="text-back" data-go="welcome">← Back</button>
+          <p class="kicker">Create our space</p>
+          <h1>Who do you want closer?</h1>
+          <p class="lead">Invite one person. They decide whether to join. Your space only exists when both of you choose it.</p>
+          <div class="identity-card">
+            <div class="avatar large">A</div>
+            <div>
+              <strong>Alex</strong>
+              <span>London · United Kingdom</span>
+            </div>
+          </div>
+          <div class="invite-card">
+            <span class="small-label">PRIVATE INVITE</span>
+            <strong>allineedislove.app/join/7K2M</strong>
+            <span>Expires in 24 hours</span>
+          </div>
+          <button class="btn primary" data-go="waiting">Send invitation</button>
+          <p class="fine-print">An invite never grants access. Your partner still chooses what to share after joining.</p>
+        </section>
+
+        <section class="screen center-screen" data-screen="invite">
+          <div class="avatar xl">A</div>
+          <p class="kicker">Alex invited you</p>
+          <h1>Build a little world together?</h1>
+          <p class="lead">You keep your own account, your own controls and your own privacy. Joining only creates a shared space.</p>
+          <button class="btn primary" data-go="connected">Join Alex</button>
+          <button class="btn secondary" data-go="welcome">Not now</button>
+        </section>
+
+        <section class="screen center-screen" data-screen="waiting">
+          <div class="pulse-wrap"><span></span><div class="avatar xl">M</div></div>
+          <p class="kicker">Invitation sent</p>
+          <h1>Now it is their choice.</h1>
+          <p class="lead">Nothing unlocks until your partner accepts. You cannot approve permissions for them.</p>
+          <button class="btn secondary" data-go="connected">Simulate acceptance</button>
+        </section>
+
+        <section class="screen" data-screen="connected">
+          <p class="kicker">Connected</p>
+          <h1>You both chose this.</h1>
+          <p class="lead">One shared space. Two equal people.</p>
+          <div class="pair-visual">
+            <div class="person"><div class="avatar large">A</div><strong>Alex</strong><span>London · 09:41</span></div>
+            <div class="pair-line"><span>♡</span></div>
+            <div class="person"><div class="avatar large rose">M</div><strong>Maya</strong><span>Manila · 16:41</span></div>
+          </div>
+          <div class="principle-card"><strong>Presence, not possession.</strong><span>Each person controls their own sharing. Always.</span></div>
+          <button class="btn primary" data-go="home">Enter our space</button>
+        </section>
+
+        <section class="screen with-nav" data-screen="home">
+          <div class="screen-header">
+            <div><p class="kicker">Right now</p><h2>Good morning, Alex.</h2></div>
+            <button class="icon-button" data-go="controls" aria-label="Open controls">•••</button>
+          </div>
+
+          <article class="partner-hero">
+            <div class="partner-top">
+              <div class="avatar large rose">M</div>
+              <div class="partner-copy"><strong>Maya</strong><span>Manila · 16:41</span></div>
+              <span class="status-pill available">Available</span>
+            </div>
+            <div class="partner-moment">
+              <span class="moment-icon">☁</span>
+              <div><span class="small-label">RIGHT NOW</span><strong>Calm · studying</strong></div>
+            </div>
+            <p class="distance-line">6,700 miles away. Still part of the ordinary day.</p>
+          </article>
+
+          <div class="two-col">
+            <article class="mini-card">
+              <span class="small-label">UNTIL WE MEET</span>
+              <strong class="metric">36</strong>
+              <span>days</span>
+            </article>
+            <article class="mini-card">
+              <span class="small-label">YOUR TIME DIFFERENCE</span>
+              <strong class="metric">+7</strong>
+              <span>hours</span>
+            </article>
+          </div>
+
+          <button class="btn presence-cta" data-go="together"><span>♡</span><div><strong>Come sit with me</strong><small>Invite Maya into a shared moment</small></div><b>→</b></button>
+
+          <div class="section-title"><strong>Since you were away</strong><button data-go="story">Our Story</button></div>
+          <article class="story-preview">
+            <div class="story-image sunset"><span>Yesterday · 18:22</span></div>
+            <div><strong>Sunset after class</strong><span>Maya shared a little piece of her day.</span></div>
+          </article>
+
+          <nav class="bottom-nav" aria-label="Primary">
+            <button class="nav-item active" data-go="home"><span>◉</span><b>Right Now</b></button>
+            <button class="nav-item" data-go="together"><span>♡</span><b>Together</b></button>
+            <button class="nav-item" data-go="story"><span>◫</span><b>Our Story</b></button>
+            <button class="nav-item" data-go="us"><span>◎</span><b>Us</b></button>
+          </nav>
+        </section>
+
+        <section class="screen with-nav" data-screen="together">
+          <p class="kicker">Together</p>
+          <h2>What kind of moment do you want?</h2>
+          <p class="lead compact">You send an invitation. Nothing starts until Maya accepts.</p>
+
+          <button class="moment-option selected" data-mode="voice"><span class="mode-icon">◖</span><div><strong>Just be here</strong><small>Voice · low data · easy company</small></div><b>✓</b></button>
+          <button class="moment-option" data-mode="video"><span class="mode-icon">◉</span><div><strong>See each other</strong><small>Video · adaptive quality</small></div><b></b></button>
+          <button class="moment-option" data-mode="screen"><span class="mode-icon">▣</span><div><strong>Look at this with me</strong><small>You choose what you present</small></div><b></b></button>
+
+          <div class="privacy-inline"><span>◌</span><p>Every shared session is visible, temporary and accepted by both people.</p></div>
+          <button class="btn primary" id="sendMoment">Send “Come sit with me”</button>
+
+          <nav class="bottom-nav">
+            <button class="nav-item" data-go="home"><span>◉</span><b>Right Now</b></button>
+            <button class="nav-item active" data-go="together"><span>♡</span><b>Together</b></button>
+            <button class="nav-item" data-go="story"><span>◫</span><b>Our Story</b></button>
+            <button class="nav-item" data-go="us"><span>◎</span><b>Us</b></button>
+          </nav>
+        </section>
+
+        <section class="screen center-screen dark-screen" data-screen="incoming">
+          <p class="kicker light">A shared moment</p>
+          <div class="avatar xxl">A</div>
+          <h1>Alex says:<br>“Come sit with me.”</h1>
+          <p class="lead light" id="incomingMode">Voice · nothing starts until you accept.</p>
+          <div class="stack-actions bottom-actions">
+            <button class="btn light-primary" data-go="live">Join now</button>
+            <button class="btn dark-secondary" data-go="home">Not now</button>
+          </div>
+          <p class="fine-print light">Declining requires no explanation and changes nothing else in your shared space.</p>
+        </section>
+
+        <section class="screen dark-screen live-screen" data-screen="live">
+          <div class="live-top"><span class="live-dot"></span><span>TOGETHER NOW</span><span id="timer">00:00</span></div>
+          <div class="live-person">
+            <div class="avatar xxl rose">M</div>
+            <h1>Maya</h1>
+            <p>Manila · 16:45</p>
+          </div>
+          <div class="live-controls">
+            <button aria-label="Mute">◖</button>
+            <button aria-label="Camera">◉</button>
+            <button class="end-call" id="endCall" aria-label="End session">×</button>
+          </div>
+          <p class="live-note">Live now · not recorded by default</p>
+        </section>
+
+        <section class="screen center-screen" data-screen="ended">
+          <div class="completion-mark">♡</div>
+          <p class="kicker">Moment ended</p>
+          <h1>That was yours.</h1>
+          <p class="lead"><span id="sessionLength">A little time</span> together. Nothing recorded.</p>
+          <button class="btn primary" data-go="story">Save a note to Our Story</button>
+          <button class="btn secondary" data-go="home">Back to Right Now</button>
+        </section>
+
+        <section class="screen with-nav" data-screen="story">
+          <p class="kicker">Our Story</p>
+          <h2>Small things become a life.</h2>
+          <p class="lead compact">Only the two of you can see this.</p>
+          <div class="story-grid">
+            <article class="memory memory-large"><div class="memory-art sunset"></div><span>Yesterday</span><strong>Sunset after class</strong></article>
+            <article class="memory"><div class="memory-art coffee"></div><span>3 days ago</span><strong>Morning coffee</strong></article>
+            <article class="memory"><div class="memory-art sky"></div><span>7 days ago</span><strong>Same moon</strong></article>
+          </div>
+          <div class="timeline-list">
+            <div><span>Today</span><strong>Shared moment together</strong></div>
+            <div><span>7 days ago</span><strong>Spain trip added</strong></div>
+            <div><span>14 days ago</span><strong>Your space began ♡</strong></div>
+          </div>
+          <button class="btn primary">Add a little moment</button>
+          <nav class="bottom-nav">
+            <button class="nav-item" data-go="home"><span>◉</span><b>Right Now</b></button>
+            <button class="nav-item" data-go="together"><span>♡</span><b>Together</b></button>
+            <button class="nav-item active" data-go="story"><span>◫</span><b>Our Story</b></button>
+            <button class="nav-item" data-go="us"><span>◎</span><b>Us</b></button>
+          </nav>
+        </section>
+
+        <section class="screen with-nav" data-screen="us">
+          <p class="kicker">Us</p>
+          <h2>Two lives. One shared chapter.</h2>
+          <div class="pair-visual compact-pair">
+            <div class="person"><div class="avatar large">A</div><strong>Alex</strong><span>London</span></div>
+            <div class="pair-line"><span>♡</span></div>
+            <div class="person"><div class="avatar large rose">M</div><strong>Maya</strong><span>Manila</span></div>
+          </div>
+          <article class="wide-card"><span class="small-label">TOGETHER FOR</span><strong class="wide-metric">14 days</strong><span>Every long story starts somewhere.</span></article>
+          <article class="wide-card"><span class="small-label">NEXT CHAPTER</span><strong>Spain · 19 September</strong><span>36 days until the airport.</span></article>
+          <button class="settings-row" data-go="controls"><div><strong>Your sharing & privacy</strong><span>Only you control your side</span></div><b>→</b></button>
+          <button class="settings-row"><div><strong>Our plans</strong><span>Trips, dates and things to do</span></div><b>→</b></button>
+          <nav class="bottom-nav">
+            <button class="nav-item" data-go="home"><span>◉</span><b>Right Now</b></button>
+            <button class="nav-item" data-go="together"><span>♡</span><b>Together</b></button>
+            <button class="nav-item" data-go="story"><span>◫</span><b>Our Story</b></button>
+            <button class="nav-item active" data-go="us"><span>◎</span><b>Us</b></button>
+          </nav>
+        </section>
+
+        <section class="screen" data-screen="controls">
+          <button class="text-back" data-go="us">← Us</button>
+          <p class="kicker">Your controls</p>
+          <h1>You stay in charge of you.</h1>
+          <p class="lead">These are Alex's settings only. Maya has her own independent controls.</p>
+
+          <div class="control-group">
+            <div class="control-row"><div><strong>Right Now status</strong><span>Mood and availability</span></div><button class="switch on" aria-pressed="true"><span></span></button></div>
+            <div class="control-row"><div><strong>Optional location</strong><span>Off by default</span></div><button class="switch" aria-pressed="false"><span></span></button></div>
+            <div class="control-row"><div><strong>Shared-session requests</strong><span>Always ask before joining</span></div><span class="status-pill">Ask every time</span></div>
+          </div>
+
+          <button class="private-time-card" id="privateTime"><span class="moon">☾</span><div><strong>Private Time</strong><small>Pause optional sharing. No explanation required.</small></div><b>→</b></button>
+          <div class="trust-note"><span>◌</span><p>Private Time never sends a reason to your partner and never creates a penalty or streak loss.</p></div>
+          <button class="danger-link" data-go="disconnect">Disconnect our space</button>
+        </section>
+
+        <section class="screen center-screen" data-screen="private">
+          <div class="completion-mark moon-mark">☾</div>
+          <p class="kicker">Private Time</p>
+          <h1>Your world is yours.</h1>
+          <p class="lead">Optional presence sharing is paused. Your memories, account and relationship space are still here.</p>
+          <button class="btn primary" data-go="home">Return when I want</button>
+          <p class="fine-print">Nothing automatically re-enables without your choice.</p>
+        </section>
+
+        <section class="screen center-screen" data-screen="disconnect">
+          <p class="kicker">Disconnect</p>
+          <div class="completion-mark">◇</div>
+          <h1>End this shared space?</h1>
+          <p class="lead">Active shared sessions and relationship-scoped sharing end immediately. Neither person can keep using an old grant.</p>
+          <button class="btn danger-btn" data-go="disconnected">Disconnect</button>
+          <button class="btn secondary" data-go="controls">Keep our space</button>
+        </section>
+
+        <section class="screen center-screen" data-screen="disconnected">
+          <div class="completion-mark">○</div>
+          <p class="kicker">Disconnected</p>
+          <h1>Your account is still yours.</h1>
+          <p class="lead">The relationship space is closed. Shared access and active session permissions have ended.</p>
+          <button class="btn primary" data-go="welcome">Finish prototype</button>
+        </section>
+
+      </div>
+    </div>
+
+    <footer class="prototype-footer">
+      <span>Research build — no real account, location, camera or microphone access.</span>
+      <span id="screenLabel">Welcome</span>
+    </footer>
+  </main>
+  <script src="./app.js"></script>
+</body>
+</html>
