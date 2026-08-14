@@ -1,0 +1,14 @@
+{
+  "name": "all-i-need-is-love",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Consent-first relationship presence platform for adults living apart.",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "prototype": "echo \"Open prototype/v1/index.html in a browser\"",
+    "test:domain": "echo \"Domain test runner will be wired when the mobile toolchain is selected\""
+  }
+}
