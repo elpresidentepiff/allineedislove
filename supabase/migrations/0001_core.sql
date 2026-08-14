@@ -117,21 +117,17 @@ create table public.consent_events (
 );
 create index consent_events_pair_created_idx on public.consent_events(pair_id, created_at desc);
 
--- A user may be in at most one active romantic pair during MVP.
-create unique index one_active_pair_membership_per_user
-on public.pair_members(user_id)
-where exists (
-  select 1 from public.pairs p
-  where p.id = pair_members.pair_id and p.status = 'active'
-);
+-- MVP invariant: a user may belong to at most one active romantic pair.
+-- This cannot be represented by a portable partial unique index because active
+-- state lives in the parent `pairs` table. The pair-acceptance transaction must
+-- lock both users, query existing active memberships, then insert both members
+-- atomically. A dedicated acceptance RPC/function is intentionally deferred to
+-- the next migration so the lifecycle can be tested independently.
 
--- PostgreSQL does not allow a partial-index predicate with this cross-table
--- dependency on all hosted versions. If deployment rejects the index above,
--- replace it with a controlled pair-acceptance transaction that obtains an
--- advisory lock per user and checks active membership before insert.
-
--- Helper used by RLS. SECURITY DEFINER prevents recursive RLS evaluation.
-create or replace function public.is_active_pair_member(p_pair_id uuid, p_user_id uuid default auth.uid())
+create or replace function public.is_active_pair_member(
+  p_pair_id uuid,
+  p_user_id uuid default auth.uid()
+)
 returns boolean
 language sql
 stable
@@ -140,18 +136,17 @@ set search_path = public
 as $$
   select exists (
     select 1
-    from public.pair_members pm
-    join public.pairs p on p.id = pm.pair_id
-    where pm.pair_id = p_pair_id
-      and pm.user_id = p_user_id
-      and p.status = 'active'
+      from public.pair_members pm
+      join public.pairs p on p.id = pm.pair_id
+     where pm.pair_id = p_pair_id
+       and pm.user_id = p_user_id
+       and p.status = 'active'
   );
 $$;
 
 revoke all on function public.is_active_pair_member(uuid, uuid) from public;
 grant execute on function public.is_active_pair_member(uuid, uuid) to authenticated;
 
--- Basic profile trigger. Users may edit the generated name later.
 create or replace function public.handle_new_user()
 returns trigger
 language plpgsql
@@ -174,7 +169,6 @@ create trigger on_auth_user_created
 after insert on auth.users
 for each row execute procedure public.handle_new_user();
 
--- Disconnect is intentionally a server-authoritative destructive transition.
 create or replace function public.disconnect_pair(p_pair_id uuid)
 returns void
 language plpgsql
@@ -200,19 +194,21 @@ begin
      and status = 'active';
 
   update public.realtime_sessions
-     set state = 'ended', ended_at = coalesce(ended_at, now())
+     set state = 'ended',
+         ended_at = coalesce(ended_at, now())
    where pair_id = p_pair_id
      and state in ('requested', 'accepted', 'connecting', 'active');
 
-  insert into public.consent_events(pair_id, actor_user_id, event, resource_type, resource_id)
-  values (p_pair_id, actor, 'disconnected', 'pair', p_pair_id);
+  insert into public.consent_events(
+    pair_id, actor_user_id, event, resource_type, resource_id
+  ) values (
+    p_pair_id, actor, 'disconnected', 'pair', p_pair_id
+  );
 end;
 $$;
 
 revoke all on function public.disconnect_pair(uuid) from public;
 grant execute on function public.disconnect_pair(uuid) to authenticated;
-
--- RLS -----------------------------------------------------------------------
 
 alter table public.profiles enable row level security;
 alter table public.devices enable row level security;
@@ -311,14 +307,14 @@ on public.realtime_sessions for select
 to authenticated
 using (public.is_active_pair_member(pair_id));
 
--- Session writes are intentionally omitted from direct client RLS in migration
--- 0001. Request/accept/decline/end transitions will be exposed through controlled
--- RPC/Edge Function paths after the physical-device realtime spike.
+-- No direct client session mutation policy in 0001.
+-- Request/accept/decline/end transitions enter through controlled RPC/Edge
+-- Function paths after the physical-device realtime spike.
 
 create policy consent_events_read_pair
 on public.consent_events for select
 to authenticated
 using (public.is_active_pair_member(pair_id));
 
--- No direct insert/update/delete policy exists for pairs, pair_members,
--- consent_events or pair lifecycle fields. They are server-authoritative.
+-- No direct client write policy exists for pairs, pair_members or consent_events.
+-- Relationship lifecycle transitions remain server-authoritative.
